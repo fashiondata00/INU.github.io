@@ -9,7 +9,7 @@
     
     body { 
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: #f7f8fa;
       min-height: 100vh;
       padding: 20px;
     }
@@ -26,41 +26,47 @@
     }
     
     .card { 
-      background: #fff; 
-      border-radius: 20px; 
+      background: #ffffff; 
+      border-radius: 16px; 
       overflow: hidden;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.08);
       height: 85vh;
       display: flex;
       flex-direction: column;
+      border: 1px solid #e5e7eb;
     }
     
     header { 
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      color: white;
+      background: #ffffff;
+      color: #1f2937;
       padding: 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      border-bottom: 1px solid #e5e7eb;
     }
     
     header h3 { 
       font-size: 1.4rem;
       font-weight: 600;
+      color: #111827;
     }
     
     #presence { 
-      background: rgba(255,255,255,0.2);
-      padding: 6px 12px;
+      background: #f3f4f6;
+      padding: 8px 16px;
       border-radius: 20px;
       font-size: 0.9rem;
-      backdrop-filter: blur(10px);
+      color: #6b7280;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
     
     .user-section {
       padding: 15px 20px;
-      background: #f8f9fa;
-      border-bottom: 1px solid #e9ecef;
+      background: #fafbfc;
+      border-bottom: 1px solid #e5e7eb;
       display: flex;
       gap: 10px;
       align-items: center;
@@ -69,33 +75,33 @@
     #name {
       flex: 1;
       padding: 10px 15px;
-      border: 2px solid #e9ecef;
-      border-radius: 10px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
       font-size: 15px;
       transition: all 0.3s;
+      background: white;
     }
     
     #name:focus {
       outline: none;
-      border-color: #667eea;
-      background: white;
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
     }
     
     #saveName {
       padding: 10px 20px;
-      background: #667eea;
+      background: #3b82f6;
       color: white;
       border: none;
-      border-radius: 10px;
-      font-weight: 600;
+      border-radius: 8px;
+      font-weight: 500;
       cursor: pointer;
       transition: all 0.3s;
     }
     
     #saveName:hover {
-      background: #5a67d8;
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+      background: #2563eb;
+      box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
     }
     
     #saveName:disabled {
@@ -109,42 +115,47 @@
       height: 8px;
       background: #10b981;
       border-radius: 50%;
-      margin-left: 5px;
       animation: pulse 2s infinite;
     }
     
     @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
+      0%, 100% { 
+        opacity: 1;
+        transform: scale(1);
+      }
+      50% { 
+        opacity: 0.8;
+        transform: scale(1.2);
+      }
     }
     
     #messages { 
       flex: 1;
       overflow-y: auto;
       padding: 20px;
-      background: #f8f9fa;
+      background: #fafbfc;
     }
     
     #messages::-webkit-scrollbar {
-      width: 8px;
+      width: 6px;
     }
     
     #messages::-webkit-scrollbar-track {
-      background: #f1f1f1;
+      background: #f3f4f6;
       border-radius: 10px;
     }
     
     #messages::-webkit-scrollbar-thumb {
-      background: #cbd5e0;
+      background: #d1d5db;
       border-radius: 10px;
     }
     
     #messages::-webkit-scrollbar-thumb:hover {
-      background: #a0aec0;
+      background: #9ca3af;
     }
     
     .msg { 
-      margin: 15px 0;
+      margin: 12px 0;
       display: flex;
       animation: slideIn 0.3s ease-out;
     }
@@ -152,11 +163,11 @@
     @keyframes slideIn {
       from { 
         opacity: 0;
-        transform: translateX(-20px);
+        transform: translateY(10px);
       }
       to { 
         opacity: 1;
-        transform: translateX(0);
+        transform: translateY(0);
       }
     }
     
@@ -170,9 +181,9 @@
     
     .msg .meta { 
       font-size: 12px;
-      color: #718096;
-      margin-bottom: 5px;
-      padding: 0 5px;
+      color: #9ca3af;
+      margin-bottom: 4px;
+      padding: 0 8px;
     }
     
     .msg.me .meta {
@@ -181,70 +192,69 @@
     
     .msg .bubble { 
       background: white;
-      padding: 12px 16px;
-      border-radius: 18px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 10px 14px;
+      border-radius: 16px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
       word-wrap: break-word;
       position: relative;
+      border: 1px solid #e5e7eb;
+      color: #1f2937;
     }
     
     .msg.me .bubble { 
-      background: linear-gradient(135deg, #667eea, #764ba2);
+      background: #3b82f6;
       color: white;
-    }
-    
-    .typing-indicator {
-      padding: 10px 20px;
-      color: #718096;
-      font-size: 14px;
-      font-style: italic;
-      min-height: 30px;
+      border: none;
     }
     
     .chat-form { 
-      padding: 20px;
+      padding: 16px 20px;
       background: white;
-      border-top: 1px solid #e9ecef;
+      border-top: 1px solid #e5e7eb;
       display: flex;
       gap: 10px;
     }
     
     #text { 
       flex: 1;
-      padding: 12px 16px;
-      border: 2px solid #e9ecef;
-      border-radius: 25px;
+      padding: 10px 16px;
+      border: 1px solid #d1d5db;
+      border-radius: 24px;
       font-size: 15px;
       transition: all 0.3s;
+      background: #f9fafb;
     }
     
     #text:focus {
       outline: none;
-      border-color: #667eea;
+      border-color: #3b82f6;
+      background: white;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
     }
     
     .send-button { 
-      padding: 12px 24px;
-      background: linear-gradient(135deg, #667eea, #764ba2);
+      padding: 10px 20px;
+      background: #3b82f6;
       color: white;
       border: none;
-      border-radius: 25px;
-      font-weight: 600;
+      border-radius: 24px;
+      font-weight: 500;
       cursor: pointer;
       transition: all 0.3s;
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 6px;
     }
     
     .send-button:hover:not(:disabled) {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+      background: #2563eb;
+      box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
     }
     
     .send-button:disabled {
       opacity: 0.5;
       cursor: not-allowed;
+      background: #9ca3af;
     }
     
     .loading {
@@ -253,14 +263,18 @@
       left: 50%;
       transform: translate(-50%, -50%);
       text-align: center;
-      color: white;
+      background: white;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+      z-index: 9999;
     }
     
     .spinner {
       width: 50px;
       height: 50px;
-      border: 3px solid rgba(255,255,255,0.3);
-      border-top-color: white;
+      border: 3px solid #e5e7eb;
+      border-top-color: #3b82f6;
       border-radius: 50%;
       animation: spin 1s linear infinite;
       margin: 0 auto 20px;
@@ -270,45 +284,83 @@
       to { transform: rotate(360deg); }
     }
     
+    .loading-text {
+      color: #6b7280;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+    
+    .connection-status {
+      color: #9ca3af;
+      font-size: 14px;
+    }
+    
     .error-message {
-      background: #fee;
-      color: #c00;
-      padding: 10px;
-      border-radius: 5px;
+      background: #fef2f2;
+      color: #dc2626;
+      padding: 12px 16px;
+      border-radius: 8px;
       margin: 10px 20px;
       display: none;
+      border: 1px solid #fecaca;
+      font-size: 14px;
     }
     
-    .emoji-picker {
-      position: absolute;
-      bottom: 70px;
-      right: 20px;
+    .error-log {
       background: white;
-      border-radius: 10px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+      color: #1f2937;
+      padding: 20px;
+      border-radius: 12px;
+      margin-top: 20px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 14px;
+      line-height: 1.6;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    
+    .error-log h4 {
+      color: #dc2626;
+      margin-bottom: 10px;
+    }
+    
+    .error-log pre {
+      background: #f9fafb;
       padding: 10px;
-      display: none;
-      grid-template-columns: repeat(8, 1fr);
-      gap: 5px;
-      z-index: 1000;
+      border-radius: 6px;
+      overflow-x: auto;
+      margin: 10px 0;
+      border: 1px solid #e5e7eb;
     }
     
-    .emoji-picker button {
-      padding: 5px;
-      border: none;
-      background: none;
-      font-size: 20px;
-      cursor: pointer;
-      border-radius: 5px;
-      transition: background 0.2s;
+    .user-count {
+      font-weight: 600;
+      color: #374151;
     }
     
-    .emoji-picker button:hover {
-      background: #f0f0f0;
+    .typing-indicator {
+      padding: 8px 20px;
+      color: #9ca3af;
+      font-size: 13px;
+      font-style: italic;
+      min-height: 28px;
+      background: #f9fafb;
+      border-top: 1px solid #f3f4f6;
     }
     
     @media (max-width: 600px) {
-      .card { height: 90vh; }
+      .card { 
+        height: 90vh;
+        border-radius: 0;
+        border: none;
+      }
+      .wrap {
+        padding: 0;
+      }
+      body {
+        padding: 0;
+      }
       .msg-content { max-width: 85%; }
       header h3 { font-size: 1.2rem; }
       .user-section { flex-direction: column; }
@@ -319,15 +371,16 @@
 <body>
   <div class="loading" id="loading">
     <div class="spinner"></div>
-    <div>채팅방 연결 중...</div>
+    <div class="loading-text">채팅방 연결 중...</div>
+    <div class="connection-status" id="connectionStatus"></div>
   </div>
   
   <div class="wrap" style="display: none;" id="app">
     <div class="card">
       <header>
-        <h3>🚀 오픈 채팅방</h3>
+        <h3>💬 오픈 채팅방</h3>
         <div id="presence">
-          접속자 0명
+          <span class="user-count">접속자 0명</span>
           <span class="status-indicator"></span>
         </div>
       </header>
@@ -345,7 +398,6 @@
       
       <form class="chat-form" id="chatForm">
         <input id="text" placeholder="메시지를 입력하세요..." maxlength="500" autocomplete="off" />
-        <button type="button" id="emojiButton" style="padding: 10px; background: none; border: none; font-size: 20px; cursor: pointer;">😊</button>
         <button type="submit" class="send-button" id="sendButton">
           <span>전송</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -354,359 +406,465 @@
           </svg>
         </button>
       </form>
-      
-      <div class="emoji-picker" id="emojiPicker">
-        <button>😊</button><button>😂</button><button>❤️</button><button>👍</button>
-        <button>😭</button><button>🙏</button><button>😘</button><button>🥰</button>
-        <button>😍</button><button>😊</button><button>🎉</button><button>😁</button>
-        <button>💕</button><button>🥺</button><button>😅</button><button>🔥</button>
-        <button>☺️</button><button>🤣</button><button>🙌</button><button>🤷</button>
-        <button>🤦</button><button>🤔</button><button>👏</button><button>💪</button>
-      </div>
     </div>
   </div>
 
   <!-- Firebase SDK -->
   <script type="module">
-    // Firebase 설정
-    const firebaseConfig = {
-      apiKey: "AIzaSyB3Vf5qeWKdWPFrBddnEczXdtzv2Iw8peQ",
-      authDomain: "marketing-1e96e.firebaseapp.com",
-      databaseURL: "https://marketing-1e96e-default-rtdb.asia-southeast1.firebasedatabase.app",
-      projectId: "marketing-1e96e",
-      storageBucket: "marketing-1e96e.firebasestorage.app",
-      messagingSenderId: "882227172037",
-      appId: "1:882227172037:web:6d4a002d7a68c7858896ac"
-    };
-
-    // SDK 불러오기
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getAuth, signInAnonymously, updateProfile, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-    import { 
-      getFirestore, 
-      collection, 
-      addDoc, 
-      serverTimestamp, 
-      query, 
-      orderBy, 
-      limit, 
-      onSnapshot,
-      where,
-      getDocs,
-      deleteDoc,
-      doc
-    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-    import { 
-      getDatabase, 
-      ref, 
-      onValue, 
-      onDisconnect, 
-      serverTimestamp as rtdbTs, 
-      set, 
-      remove,
-      push,
-      child
-    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
-
-    // 초기화
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
-    const rtdb = getDatabase(app);
-
-    const ROOM_ID = "open-room-1";
-    const messagesRef = collection(db, `rooms/${ROOM_ID}/messages`);
-
-    // DOM 요소
+    console.log('스크립트 시작');
+    
+    // 연결 상태 표시
+    const $connectionStatus = document.getElementById('connectionStatus');
     const $loading = document.getElementById("loading");
     const $app = document.getElementById("app");
-    const $messages = document.getElementById("messages");
-    const $form = document.getElementById("chatForm");
-    const $text = document.getElementById("text");
-    const $name = document.getElementById("name");
-    const $saveName = document.getElementById("saveName");
-    const $presence = document.getElementById("presence");
-    const $errorMessage = document.getElementById("errorMessage");
-    const $typingIndicator = document.getElementById("typingIndicator");
-    const $sendButton = document.getElementById("sendButton");
-    const $emojiButton = document.getElementById("emojiButton");
-    const $emojiPicker = document.getElementById("emojiPicker");
-
-    let currentUid = null;
-    let typingTimeout = null;
-    let lastMessageTime = 0;
-    const MESSAGE_COOLDOWN = 1000; // 1초 쿨다운
-
+    
+    function updateConnectionStatus(message) {
+      console.log('상태 업데이트:', message);
+      if ($connectionStatus) {
+        $connectionStatus.textContent = message;
+      }
+    }
+    
     // 에러 표시 함수
-    function showError(message) {
-      $errorMessage.textContent = message;
-      $errorMessage.style.display = 'block';
-      setTimeout(() => {
-        $errorMessage.style.display = 'none';
-      }, 5000);
+    function showConnectionError(error) {
+      console.error('연결 오류:', error);
+      const errorDiv = document.createElement('div');
+      errorDiv.className = 'error-log';
+      errorDiv.innerHTML = `
+        <h4>⚠️ 연결 오류 발생</h4>
+        <p><strong>오류 메시지:</strong></p>
+        <pre>${error.message || error}</pre>
+        <p style="margin-top:10px;">
+          <button onclick="location.reload()" style="padding:8px 16px; background:#3b82f6; color:white; border:none; border-radius:6px; cursor:pointer;">
+            새로고침
+          </button>
+        </p>
+      `;
+      document.body.appendChild(errorDiv);
     }
-
-    // 로컬스토리지에서 닉네임 불러오기
-    const savedName = localStorage.getItem('chatName');
-    if (savedName) {
-      $name.value = savedName;
-    }
-
-    // 이모지 픽커 토글
-    $emojiButton.addEventListener('click', () => {
-      $emojiPicker.style.display = $emojiPicker.style.display === 'grid' ? 'none' : 'grid';
-    });
-
-    // 이모지 선택
-    $emojiPicker.addEventListener('click', (e) => {
-      if (e.target.tagName === 'BUTTON') {
-        $text.value += e.target.textContent;
-        $emojiPicker.style.display = 'none';
-        $text.focus();
-      }
-    });
-
-    // 외부 클릭시 이모지 픽커 닫기
-    document.addEventListener('click', (e) => {
-      if (!$emojiButton.contains(e.target) && !$emojiPicker.contains(e.target)) {
-        $emojiPicker.style.display = 'none';
-      }
-    });
-
-    // XSS 방지를 위한 HTML 이스케이프
-    function escapeHtml(text) {
-      const div = document.createElement('div');
-      div.textContent = text;
-      return div.innerHTML;
-    }
-
-    // URL을 링크로 변환
-    function linkify(text) {
-      const urlRegex = /(https?:\/\/[^\s]+)/g;
-      return text.replace(urlRegex, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>');
-    }
-
-    // 익명 로그인
-    signInAnonymously(auth).catch(error => {
-      showError('로그인 실패: ' + error.message);
-    });
-
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        currentUid = user.uid;
-        
-        // Presence 설정
-        const meRef = ref(rtdb, `presence/${ROOM_ID}/${currentUid}`);
-        const userInfo = {
-          online: true,
-          lastSeen: rtdbTs(),
-          name: $name.value || '익명'
-        };
-        
-        set(meRef, userInfo);
-        onDisconnect(meRef).remove();
-        
-        // 타이핑 상태 제거 설정
-        const typingRef = ref(rtdb, `typing/${ROOM_ID}/${currentUid}`);
-        onDisconnect(typingRef).remove();
-        
-        // 앱 표시
-        $loading.style.display = 'none';
-        $app.style.display = 'block';
-      }
-    });
-
-    // 접속자 수 표시
-    const presenceRef = ref(rtdb, `presence/${ROOM_ID}`);
-    onValue(presenceRef, (snap) => {
-      const val = snap.val() || {};
-      const count = Object.keys(val).length;
-      $presence.innerHTML = `접속자 ${count}명<span class="status-indicator"></span>`;
-    });
-
-    // 타이핑 상태 표시
-    const typingRef = ref(rtdb, `typing/${ROOM_ID}`);
-    onValue(typingRef, (snap) => {
-      const val = snap.val() || {};
-      const typingUsers = Object.entries(val)
-        .filter(([uid]) => uid !== currentUid)
-        .map(([_, data]) => data.name);
+    
+    try {
+      updateConnectionStatus('Firebase SDK 로딩 중...');
       
-      if (typingUsers.length > 0) {
-        if (typingUsers.length === 1) {
-          $typingIndicator.textContent = `${typingUsers[0]}님이 입력 중...`;
-        } else {
-          $typingIndicator.textContent = `${typingUsers.length}명이 입력 중...`;
-        }
-      } else {
-        $typingIndicator.textContent = '';
-      }
-    });
+      // Firebase 설정
+      const firebaseConfig = {
+        apiKey: "AIzaSyB3Vf5qeWKdWPFrBddnEczXdtzv2Iw8peQ",
+        authDomain: "marketing-1e96e.firebaseapp.com",
+        databaseURL: "https://marketing-1e96e-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "marketing-1e96e",
+        storageBucket: "marketing-1e96e.firebasestorage.app",
+        messagingSenderId: "882227172037",
+        appId: "1:882227172037:web:6d4a002d7a68c7858896ac"
+      };
 
-    // 타이핑 상태 업데이트
-    $text.addEventListener('input', () => {
-      if ($text.value.trim() && currentUid) {
-        const typingRef = ref(rtdb, `typing/${ROOM_ID}/${currentUid}`);
-        set(typingRef, {
-          name: $name.value || '익명',
-          timestamp: rtdbTs()
-        });
-        
-        clearTimeout(typingTimeout);
-        typingTimeout = setTimeout(() => {
-          remove(typingRef);
-        }, 3000);
-      }
-    });
+      // SDK 불러오기
+      updateConnectionStatus('Firebase 모듈 임포트 중...');
+      
+      const { initializeApp } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js");
+      const { getAuth, signInAnonymously, updateProfile, onAuthStateChanged } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js");
+      const { 
+        getFirestore, 
+        collection, 
+        addDoc, 
+        serverTimestamp, 
+        query, 
+        orderBy, 
+        limit, 
+        onSnapshot,
+        enableNetwork,
+        disableNetwork
+      } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js");
+      const { 
+        getDatabase, 
+        ref, 
+        onValue, 
+        onDisconnect, 
+        serverTimestamp as rtdbTs, 
+        set, 
+        remove,
+        get,
+        push
+      } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js");
 
-    // 닉네임 저장
-    $saveName.addEventListener("click", async () => {
-      const nickname = $name.value.trim();
-      
-      if (!nickname) {
-        showError('닉네임을 입력해주세요.');
-        return;
+      console.log('Firebase 모듈 로드 완료');
+      updateConnectionStatus('Firebase 초기화 중...');
+
+      // 초기화
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+      const db = getFirestore(app);
+      const rtdb = getDatabase(app);
+
+      console.log('Firebase 초기화 완료');
+      updateConnectionStatus('인증 시도 중...');
+
+      const ROOM_ID = "open-room-1";
+      const messagesRef = collection(db, `rooms/${ROOM_ID}/messages`);
+
+      // DOM 요소
+      const $messages = document.getElementById("messages");
+      const $form = document.getElementById("chatForm");
+      const $text = document.getElementById("text");
+      const $name = document.getElementById("name");
+      const $saveName = document.getElementById("saveName");
+      const $presence = document.getElementById("presence");
+      const $errorMessage = document.getElementById("errorMessage");
+      const $sendButton = document.getElementById("sendButton");
+      const $typingIndicator = document.getElementById("typingIndicator");
+
+      let currentUid = null;
+      let lastMessageTime = 0;
+      let typingTimeout = null;
+      const MESSAGE_COOLDOWN = 1000;
+
+      // 에러 표시 함수
+      function showError(message) {
+        $errorMessage.textContent = message;
+        $errorMessage.style.display = 'block';
+        setTimeout(() => {
+          $errorMessage.style.display = 'none';
+        }, 5000);
       }
-      
-      if (nickname.length > 20) {
-        showError('닉네임은 20자 이내로 입력해주세요.');
-        return;
+
+      // 로컬스토리지에서 닉네임 불러오기
+      const savedName = localStorage.getItem('chatName');
+      if (savedName) {
+        $name.value = savedName;
       }
+
+      // XSS 방지
+      function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+      }
+
+      // URL 링크 변환
+      function linkify(text) {
+        const urlRegex = /(https?:\/\/[^\s]+)/g;
+        return text.replace(urlRegex, '<a href="$1" target="_blank" rel="noopener noreferrer" style="color: #3b82f6; text-decoration: underline;">$1</a>');
+      }
+
+      // 익명 로그인 시도
+      let authAttempts = 0;
+      const maxAuthAttempts = 3;
       
-      $saveName.disabled = true;
-      
-      try {
-        if (auth.currentUser) {
-          await updateProfile(auth.currentUser, { displayName: nickname });
-          localStorage.setItem('chatName', nickname);
+      async function attemptAuth() {
+        try {
+          authAttempts++;
+          console.log(`인증 시도 ${authAttempts}/${maxAuthAttempts}`);
+          updateConnectionStatus(`인증 시도 중... (${authAttempts}/${maxAuthAttempts})`);
           
-          // Presence 업데이트
-          const meRef = ref(rtdb, `presence/${ROOM_ID}/${currentUid}`);
-          set(meRef, {
-            online: true,
-            lastSeen: rtdbTs(),
-            name: nickname
+          const userCredential = await signInAnonymously(auth);
+          console.log('로그인 성공:', userCredential.user.uid);
+          updateConnectionStatus('로그인 성공!');
+          
+        } catch (error) {
+          console.error('로그인 오류:', error);
+          
+          if (authAttempts < maxAuthAttempts) {
+            updateConnectionStatus(`인증 실패. 재시도 중... (${authAttempts}/${maxAuthAttempts})`);
+            setTimeout(() => attemptAuth(), 2000);
+          } else {
+            showConnectionError(error);
+            updateConnectionStatus('인증 실패. 새로고침 해주세요.');
+          }
+        }
+      }
+      
+      // 인증 시작
+      attemptAuth();
+
+      // 인증 상태 변경 감지
+      onAuthStateChanged(auth, async (user) => {
+        console.log('인증 상태 변경:', user ? user.uid : 'null');
+        
+        if (user) {
+          currentUid = user.uid;
+          updateConnectionStatus('데이터베이스 연결 중...');
+          
+          try {
+            // Presence 설정 - 개선된 버전
+            const userRef = ref(rtdb, `presence/${ROOM_ID}/${currentUid}`);
+            const connectedRef = ref(rtdb, '.info/connected');
+            
+            // 연결 상태 감지
+            onValue(connectedRef, async (snap) => {
+              if (snap.val() === true) {
+                console.log('Realtime Database 연결됨');
+                
+                // 현재 사용자 정보 설정
+                const userInfo = {
+                  uid: currentUid,
+                  name: $name.value || '익명',
+                  online: true,
+                  lastSeen: rtdbTs()
+                };
+                
+                // 사용자 정보 설정
+                await set(userRef, userInfo);
+                
+                // 연결 해제 시 자동 제거
+                onDisconnect(userRef).remove().then(() => {
+                  console.log('onDisconnect 설정 완료');
+                }).catch((error) => {
+                  console.error('onDisconnect 설정 오류:', error);
+                });
+                
+                // 타이핑 상태도 연결 해제 시 제거
+                const typingRef = ref(rtdb, `typing/${ROOM_ID}/${currentUid}`);
+                onDisconnect(typingRef).remove();
+                
+                updateConnectionStatus('연결 완료!');
+                
+                // 앱 표시
+                setTimeout(() => {
+                  $loading.style.display = 'none';
+                  $app.style.display = 'block';
+                }, 500);
+              } else {
+                console.log('Realtime Database 연결 끊김');
+              }
+            });
+            
+          } catch (error) {
+            console.error('데이터베이스 연결 오류:', error);
+            showConnectionError(error);
+          }
+        }
+      });
+
+      // 접속자 수 표시 - 개선된 버전
+      const presenceRef = ref(rtdb, `presence/${ROOM_ID}`);
+      onValue(presenceRef, (snap) => {
+        const users = snap.val() || {};
+        const onlineUsers = Object.values(users).filter(user => user.online === true);
+        const count = onlineUsers.length;
+        
+        console.log('접속자 정보:', users);
+        console.log('온라인 사용자 수:', count);
+        
+        $presence.innerHTML = `
+          <span class="user-count">접속자 ${count}명</span>
+          <span class="status-indicator"></span>
+        `;
+      }, (error) => {
+        console.error('Presence 읽기 오류:', error);
+      });
+
+      // 타이핑 상태 표시
+      const typingRef = ref(rtdb, `typing/${ROOM_ID}`);
+      onValue(typingRef, (snap) => {
+        const val = snap.val() || {};
+        const typingUsers = Object.entries(val)
+          .filter(([uid]) => uid !== currentUid)
+          .map(([_, data]) => data.name);
+        
+        if (typingUsers.length > 0) {
+          if (typingUsers.length === 1) {
+            $typingIndicator.textContent = `${typingUsers[0]}님이 입력 중...`;
+          } else {
+            $typingIndicator.textContent = `${typingUsers.length}명이 입력 중...`;
+          }
+        } else {
+          $typingIndicator.textContent = '';
+        }
+      });
+
+      // 타이핑 상태 업데이트
+      $text.addEventListener('input', () => {
+        if ($text.value.trim() && currentUid) {
+          const typingRef = ref(rtdb, `typing/${ROOM_ID}/${currentUid}`);
+          set(typingRef, {
+            name: $name.value || '익명',
+            timestamp: rtdbTs()
           });
           
-          showError('✅ 닉네임이 저장되었습니다!');
+          clearTimeout(typingTimeout);
+          typingTimeout = setTimeout(() => {
+            remove(typingRef);
+          }, 3000);
         }
-      } catch (error) {
-        showError('닉네임 저장 실패: ' + error.message);
-      } finally {
-        $saveName.disabled = false;
-      }
-    });
+      });
 
-    // 메시지 수신
-    const q = query(messagesRef, orderBy("ts", "desc"), limit(50));
-    onSnapshot(q, (snap) => {
-      const messages = [];
-      snap.forEach(doc => {
-        const m = doc.data();
-        const isMe = m.uid === currentUid;
-        const time = m.ts?.toDate?.();
-        const timeStr = time ? new Intl.DateTimeFormat('ko-KR', {
-          hour: '2-digit',
-          minute: '2-digit'
-        }).format(time) : '';
+      // 닉네임 저장
+      $saveName.addEventListener("click", async () => {
+        const nickname = $name.value.trim();
         
-        const safeText = linkify(escapeHtml(m.text));
+        if (!nickname) {
+          showError('닉네임을 입력해주세요.');
+          return;
+        }
         
-        messages.push(`
-          <div class="msg ${isMe ? 'me' : ''}">
-            <div class="msg-content">
-              <div class="meta">${escapeHtml(m.name)} · ${timeStr}</div>
-              <div class="bubble">${safeText}</div>
+        if (nickname.length > 20) {
+          showError('닉네임은 20자 이내로 입력해주세요.');
+          return;
+        }
+        
+        $saveName.disabled = true;
+        
+        try {
+          if (auth.currentUser) {
+            await updateProfile(auth.currentUser, { displayName: nickname });
+            localStorage.setItem('chatName', nickname);
+            
+            // Presence 정보도 업데이트
+            const userRef = ref(rtdb, `presence/${ROOM_ID}/${currentUid}`);
+            await set(userRef, {
+              uid: currentUid,
+              name: nickname,
+              online: true,
+              lastSeen: rtdbTs()
+            });
+            
+            showError('✅ 닉네임이 저장되었습니다!');
+          }
+        } catch (error) {
+          showError('닉네임 저장 실패: ' + error.message);
+        } finally {
+          $saveName.disabled = false;
+        }
+      });
+
+      // 메시지 수신
+      const q = query(messagesRef, orderBy("ts", "desc"), limit(50));
+      onSnapshot(q, (snap) => {
+        const messages = [];
+        snap.forEach(doc => {
+          const m = doc.data();
+          const isMe = m.uid === currentUid;
+          const time = m.ts?.toDate?.();
+          const timeStr = time ? new Intl.DateTimeFormat('ko-KR', {
+            hour: '2-digit',
+            minute: '2-digit'
+          }).format(time) : '';
+          
+          const safeText = linkify(escapeHtml(m.text));
+          
+          messages.push(`
+            <div class="msg ${isMe ? 'me' : ''}">
+              <div class="msg-content">
+                <div class="meta">${escapeHtml(m.name)} · ${timeStr}</div>
+                <div class="bubble">${safeText}</div>
+              </div>
             </div>
-          </div>
-        `);
+          `);
+        });
+        
+        $messages.innerHTML = messages.reverse().join('');
+        $messages.scrollTop = $messages.scrollHeight;
+      }, (error) => {
+        console.error('메시지 로드 오류:', error);
+        showError('메시지 로드 실패: ' + error.message);
+      });
+
+      // 메시지 전송
+      $form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        
+        const text = $text.value.trim();
+        const nickname = $name.value.trim() || '익명';
+        
+        if (!text) return;
+        
+        // 쿨다운 체크
+        const now = Date.now();
+        if (now - lastMessageTime < MESSAGE_COOLDOWN) {
+          showError('메시지 전송이 너무 빠릅니다. 잠시 후 다시 시도해주세요.');
+          return;
+        }
+        
+        if (text.length > 500) {
+          showError('메시지는 500자 이내로 입력해주세요.');
+          return;
+        }
+        
+        $sendButton.disabled = true;
+        $text.disabled = true;
+        
+        try {
+          await addDoc(messagesRef, {
+            uid: currentUid,
+            name: nickname,
+            text: text,
+            ts: serverTimestamp()
+          });
+          
+          $text.value = "";
+          lastMessageTime = now;
+          
+          // 타이핑 상태 제거
+          if (currentUid) {
+            const typingRef = ref(rtdb, `typing/${ROOM_ID}/${currentUid}`);
+            remove(typingRef);
+          }
+          
+        } catch (error) {
+          console.error('메시지 전송 오류:', error);
+          showError('메시지 전송 실패: ' + error.message);
+        } finally {
+          $sendButton.disabled = false;
+          $text.disabled = false;
+          $text.focus();
+        }
+      });
+
+      // Enter 키로 전송
+      $text.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          $form.dispatchEvent(new Event('submit'));
+        }
+      });
+
+      // 네트워크 상태 확인
+      window.addEventListener('online', () => {
+        console.log('네트워크 연결됨');
+        enableNetwork(db);
       });
       
-      $messages.innerHTML = messages.reverse().join('');
-      $messages.scrollTop = $messages.scrollHeight;
-    }, (error) => {
-      showError('메시지 로드 실패: ' + error.message);
-    });
+      window.addEventListener('offline', () => {
+        console.log('네트워크 연결 끊김');
+        showError('네트워크 연결이 끊어졌습니다.');
+        disableNetwork(db);
+      });
 
-    // 메시지 전송
-    $form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      
-      const text = $text.value.trim();
-      const nickname = $name.value.trim() || '익명';
-      
-      if (!text) return;
-      
-      // 쿨다운 체크
-      const now = Date.now();
-      if (now - lastMessageTime < MESSAGE_COOLDOWN) {
-        showError('메시지 전송이 너무 빠릅니다. 잠시 후 다시 시도해주세요.');
-        return;
-      }
-      
-      if (text.length > 500) {
-        showError('메시지는 500자 이내로 입력해주세요.');
-        return;
-      }
-      
-      $sendButton.disabled = true;
-      $text.disabled = true;
-      
-      try {
-        await addDoc(messagesRef, {
-          uid: currentUid,
-          name: nickname,
-          text: text,
-          ts: serverTimestamp()
-        });
-        
-        $text.value = "";
-        lastMessageTime = now;
-        
-        // 타이핑 상태 제거
+      // 브라우저 탭/창 닫을 때 처리
+      window.addEventListener('beforeunload', () => {
         if (currentUid) {
-          const typingRef = ref(rtdb, `typing/${ROOM_ID}/${currentUid}`);
-          remove(typingRef);
+          const userRef = ref(rtdb, `presence/${ROOM_ID}/${currentUid}`);
+          remove(userRef);
         }
-      } catch (error) {
-        showError('메시지 전송 실패: ' + error.message);
-      } finally {
-        $sendButton.disabled = false;
-        $text.disabled = false;
-        $text.focus();
-      }
-    });
+      });
 
-    // Enter 키로 전송, Shift+Enter로 줄바꿈
-    $text.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        $form.dispatchEvent(new Event('submit'));
-      }
-    });
+      // 페이지 visibility 변경 감지
+      document.addEventListener('visibilitychange', () => {
+        if (currentUid) {
+          const userRef = ref(rtdb, `presence/${ROOM_ID}/${currentUid}`);
+          if (document.hidden) {
+            // 탭이 백그라운드로 갔을 때
+            set(userRef, {
+              uid: currentUid,
+              name: $name.value || '익명',
+              online: false,
+              lastSeen: rtdbTs()
+            });
+          } else {
+            // 탭이 다시 활성화됐을 때
+            set(userRef, {
+              uid: currentUid,
+              name: $name.value || '익명',
+              online: true,
+              lastSeen: rtdbTs()
+            });
+          }
+        }
+      });
 
-    // 오래된 메시지 정리 (선택사항 - 24시간 이상 된 메시지 삭제)
-    async function cleanOldMessages() {
-      const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
-      const oldMessagesQuery = query(
-        messagesRef,
-        where('ts', '<', oneDayAgo)
-      );
-      
-      try {
-        const snapshot = await getDocs(oldMessagesQuery);
-        const deletePromises = [];
-        snapshot.forEach((document) => {
-          deletePromises.push(deleteDoc(doc(db, `rooms/${ROOM_ID}/messages`, document.id)));
-        });
-        await Promise.all(deletePromises);
-      } catch (error) {
-        console.error('오래된 메시지 정리 실패:', error);
-      }
+    } catch (error) {
+      console.error('초기화 오류:', error);
+      showConnectionError(error);
     }
-
-    // 24시간마다 오래된 메시지 정리
-    setInterval(cleanOldMessages, 24 * 60 * 60 * 1000);
   </script>
 </body>
 </html>
