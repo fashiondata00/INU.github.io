@@ -1,96 +1,211 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" data-theme="light">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Data marketing (Made by. Fashiondata00 Lab)</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background:#f7f8fa; min-height:100vh; padding:20px; }
-    .wrap { max-width:800px; margin:0 auto; animation:fadeIn .5s ease-in; }
-    @keyframes fadeIn { from{opacity:0; transform:translateY(20px)} to{opacity:1; transform:translateY(0)} }
-    .card { background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 2px 20px rgba(0,0,0,.08); height:85vh; display:flex; flex-direction:column; border:1px solid #e5e7eb; }
-    header { background:#fff; color:#1f2937; padding:20px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #e5e7eb; }
-    header h3 { font-size:1.4rem; font-weight:600; color:#111827; }
-    #presence { background:#f3f4f6; padding:8px 16px; border-radius:20px; font-size:.9rem; color:#6b7280; display:flex; align-items:center; gap:8px; }
-    .user-section { padding:15px 20px; background:#fafbfc; border-bottom:1px solid #e5e7eb; display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
-    #name { flex:1; min-width:200px; padding:10px 15px; border:1px solid #d1d5db; border-radius:8px; font-size:15px; transition:.3s; background:#fff; }
-    #name:focus { outline:none; border-color:#3b82f6; box-shadow:0 0 0 3px rgba(59,130,246,.1); }
-    #saveName { padding:10px 20px; background:#3b82f6; color:#fff; border:none; border-radius:8px; font-weight:500; cursor:pointer; transition:.3s; }
-    #saveName:hover { background:#2563eb; box-shadow:0 2px 8px rgba(59,130,246,.3); }
-    #saveName:disabled { opacity:.5; cursor:not-allowed; }
-    .status-indicator { width:8px; height:8px; background:#10b981; border-radius:50%; animation:pulse 2s infinite; display:inline-block; }
-    @keyframes pulse { 0%,100%{opacity:1; transform:scale(1)} 50%{opacity:.8; transform:scale(1.2)} }
-    #messages { flex:1; overflow-y:auto; padding:20px; background:#fafbfc; }
-    #messages::-webkit-scrollbar{width:6px} #messages::-webkit-scrollbar-track{background:#f3f4f6; border-radius:10px} #messages::-webkit-scrollbar-thumb{background:#d1d5db; border-radius:10px} #messages::-webkit-scrollbar-thumb:hover{background:#9ca3af}
-    .msg{ margin:12px 0; display:flex; animation:slideIn .3s ease-out; }
-    @keyframes slideIn{ from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:translateY(0)} }
-    .msg.me{ justify-content:flex-end; }
-    .msg-content{ max-width:70%; }
-    .msg .meta{ font-size:12px; color:#9ca3af; margin-bottom:4px; padding:0 8px; }
-    .msg.me .meta{ text-align:right; }
-    .msg .bubble{ background:#fff; padding:10px 14px; border-radius:16px; box-shadow:0 1px 3px rgba(0,0,0,.08); word-wrap:break-word; border:1px solid #e5e7eb; color:#1f2937; }
-    .msg.me .bubble{ background:#3b82f6; color:#fff; border:none; }
-    .file-link{ text-decoration:underline; }
-    .chat-form{ padding:16px 20px; background:#fff; border-top:1px solid #e5e7eb; display:flex; gap:10px; }
-    #text{ flex:1; padding:10px 16px; border:1px solid #d1d5db; border-radius:24px; font-size:15px; transition:.3s; background:#f9fafb; }
-    #text:focus{ outline:none; border-color:#3b82f6; background:#fff; box-shadow:0 0 0 3px rgba(59,130,246,.1); }
-    .send-button{ padding:10px 20px; background:#3b82f6; color:#fff; border:none; border-radius:24px; font-weight:500; cursor:pointer; transition:.3s; display:flex; align-items:center; gap:6px; }
-    .send-button:hover:not(:disabled){ background:#2563eb; box-shadow:0 2px 8px rgba(59,130,246,.3); }
-    .send-button:disabled{ opacity:.5; cursor:not-allowed; background:#9ca3af; }
-    .loading{ position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); text-align:center; background:#fff; padding:40px; border-radius:16px; box-shadow:0 10px 40px rgba(0,0,0,.1); z-index:9999; }
-    .spinner{ width:50px; height:50px; border:3px solid #e5e7eb; border-top-color:#3b82f6; border-radius:50%; animation:spin 1s linear infinite; margin:0 auto 20px; }
-    @keyframes spin{ to{transform:rotate(360deg)} }
-    .loading-text{ color:#6b7280; font-size:16px; margin-bottom:10px; }
-    .connection-status{ color:#9ca3af; font-size:14px; }
-    .error-message{ background:#fef2f2; color:#dc2626; padding:12px 16px; border-radius:8px; margin:10px 20px; display:none; border:1px solid #fecaca; font-size:14px; }
-    .user-count{ font-weight:600; color:#374151; }
-    .file-input { padding:8px 12px; border:1px solid #d1d5db; border-radius:8px; background:#fff; }
-    @media (max-width:600px){ .card{ height:90vh; border-radius:0; border:none } .wrap{ padding:0 } body{ padding:0 } .msg-content{ max-width:85% } header h3{ font-size:1.2rem } .user-section{ flex-direction:column } #name,#saveName{ width:100% } }
+    :root{
+      --bg:#fef7f0;
+      --card:#ffffff;
+      --text:#1a1a1a;
+      --muted:#666666;
+      --border:#ffe4d1;
+      --primary:#ff6600;
+      --primary-light:#ff8533;
+      --primary-dark:#e55a00;
+      --primary-2:#ff9966;
+      --bubble:#ffffff;
+      --bubble-me:#ff6600;
+      --bubble-text:#1a1a1a;
+      --bubble-me-text:#ffffff;
+      --chip:#fff5f0;
+      --shadow:0 8px 30px rgba(255,102,0,.15);
+      --glass:rgba(255,255,255,.85);
+      --accent:#ffcc99;
+      --success:#10b981;
+      --hover:#fff0e6;
+    }
+    [data-theme="dark"]{
+      --bg:#1a0f0a;
+      --card:#2a1f1a;
+      --text:#f0f0f0;
+      --muted:#b3b3b3;
+      --border:#3d2b1f;
+      --primary:#ff7a1a;
+      --primary-light:#ff9444;
+      --primary-dark:#e5690f;
+      --primary-2:#ff9966;
+      --bubble:#2a1f1a;
+      --bubble-me:#ff6600;
+      --bubble-text:#f0f0f0;
+      --bubble-me-text:#ffffff;
+      --chip:#2d1f14;
+      --shadow:0 8px 30px rgba(255,102,0,.25);
+      --glass:rgba(255,255,255,.15);
+      --accent:#ff9966;
+      --success:#10b981;
+      --hover:#332117;
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:var(--bg);min-height:100vh;padding:20px;color:var(--text);}
+
+    .wrap{max-width:900px;margin:0 auto;animation:fadeIn .5s ease}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)}}
+
+    .card{background:var(--card);border-radius:20px;overflow:hidden;box-shadow:var(--shadow);height:85vh;display:flex;flex-direction:column;border:1px solid var(--border);}
+
+    header{
+      position:relative;
+      background:linear-gradient(135deg,var(--primary) 0%,var(--primary-2) 100%);
+      color:#fff;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;
+    }
+    header h3{font-size:1.25rem;font-weight:700;letter-spacing:.2px;display:flex;gap:10px;align-items:center}
+    .presence{
+      display:flex;gap:10px;align-items:center;background:var(--glass);
+      padding:8px 14px;border-radius:999px;backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.35);
+      font-weight:600;
+    }
+    .presence .dot{width:10px;height:10px;border-radius:50%;background:var(--success);box-shadow:0 0 0 0 rgba(16,185,129,.7);animation:ping 1.8s infinite}
+    @keyframes ping{0%{box-shadow:0 0 0 0 rgba(16,185,129,.6)}70%{box-shadow:0 0 0 8px rgba(16,185,129,0)}100%{box-shadow:0 0 0 0 rgba(16,185,129,0)}}
+
+    .toolbar{display:flex;gap:8px;align-items:center}
+    .btn{
+      display:inline-flex;gap:8px;align-items:center;justify-content:center;
+      padding:8px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.25);
+      background:var(--glass);color:#fff;cursor:pointer;transition:all .2s ease;
+    }
+    .btn:hover{transform:translateY(-1px);background:rgba(255,255,255,.95);color:var(--primary)}
+    .btn-ghost{background:transparent;border-color:rgba(255,255,255,.35)}
+    .btn svg{pointer-events:none}
+
+    .user-section{padding:14px 16px;background:var(--hover);border-bottom:1px solid var(--border);display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    #name{flex:1;min-width:200px;padding:10px 14px;border:1px solid var(--border);border-radius:10px;font-size:15px;background:var(--card);color:var(--text);transition:all .2s ease}
+    #name:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(255,102,0,.2)}
+    #saveName{padding:10px 16px;background:var(--primary);color:#fff;border:none;border-radius:10px;font-weight:600;cursor:pointer;transition:all .2s ease}
+    #saveName:hover{background:var(--primary-light);transform:translateY(-1px)}
+    #saveName:active{background:var(--primary-dark);transform:translateY(0)}
+    #saveName:disabled{opacity:.6;cursor:not-allowed}
+
+    #messages{flex:1;overflow-y:auto;padding:18px;scroll-behavior:smooth;background:
+      radial-gradient(1200px 300px at 100% 0%, rgba(255,102,0,.08), transparent 60%),
+      radial-gradient(800px 200px at 0% 100%, rgba(255,153,102,.06), transparent 60%);}
+    #messages::-webkit-scrollbar{width:8px}
+    #messages::-webkit-scrollbar-thumb{background:var(--accent);border-radius:999px}
+    #messages::-webkit-scrollbar-track{background:var(--chip)}
+
+    .msg{margin:10px 0;display:flex;gap:10px}
+    .msg.me{justify-content:flex-end}
+    .avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--primary-2));display:flex;align-items:center;justify-content:center;color:#fff;font-size:.8rem;font-weight:700;flex:0 0 auto}
+    .msg.me .avatar{background:linear-gradient(135deg,var(--primary-dark),var(--primary))}
+
+    .msg-content{max-width:70%}
+    .meta{font-size:12px;color:var(--muted);margin:0 6px 6px}
+    .bubble{background:var(--bubble);color:var(--bubble-text);padding:12px 14px;border-radius:16px;border:1px solid var(--border);box-shadow:0 2px 8px rgba(255,102,0,.1);transition:all .2s ease}
+    .msg.me .bubble{background:var(--bubble-me);color:var(--bubble-me-text);border:none;box-shadow:0 2px 12px rgba(255,102,0,.25)}
+    .bubble a{color:var(--primary);text-decoration:underline;word-break:break-all}
+    .msg.me .bubble a{color:rgba(255,255,255,.9)}
+
+    .file-card{display:flex;align-items:center;gap:10px}
+    .file-icon{flex:0 0 auto;width:20px;height:20px;color:var(--primary)}
+    .msg.me .file-icon{color:rgba(255,255,255,.9)}
+    .muted{color:var(--muted)}
+    .file-actions{margin-top:6px;font-size:12px}
+    .file-link{color:var(--primary);font-weight:600;text-decoration:none;transition:color .2s ease}
+    .file-link:hover{color:var(--primary-light)}
+    .msg.me .file-link{color:rgba(255,255,255,.9)}
+    .msg.me .file-link:hover{color:#fff}
+
+    .chat-form{padding:12px 14px;background:var(--card);border-top:1px solid var(--border);display:flex;gap:10px;align-items:center}
+    .icon-btn{width:40px;height:40px;border-radius:12px;border:1px solid var(--border);background:var(--chip);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s ease;color:var(--primary)}
+    .icon-btn:hover{transform:translateY(-1px);background:var(--primary);color:#fff;border-color:var(--primary)}
+    #text{flex:1;padding:12px 16px;border:1px solid var(--border);border-radius:14px;font-size:15px;background:var(--chip);color:var(--text);transition:all .2s ease}
+    #text:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(255,102,0,.15);background:var(--card)}
+    .send-button{padding:12px 18px;background:var(--primary);color:#fff;border:none;border-radius:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px;transition:all .2s ease}
+    .send-button:hover{background:var(--primary-light);transform:translateY(-1px)}
+    .send-button:active{background:var(--primary-dark);transform:translateY(0)}
+    .send-button:disabled{opacity:.5;cursor:not-allowed;background:var(--muted)}
+
+    .error-message{background:var(--hover);color:var(--primary-dark);padding:12px 16px;border-radius:10px;margin:10px 16px;display:none;border:1px solid var(--accent);font-size:14px}
+
+    /* Drop zone */
+    .drop-zone{position:absolute;inset:0;display:none;align-items:center;justify-content:center;pointer-events:none}
+    .drop-zone.show{display:flex}
+    .drop-surface{pointer-events:auto;border:2px dashed var(--primary);border-radius:16px;background:rgba(255,102,0,.08);padding:24px 28px;color:var(--text);backdrop-filter:blur(6px)}
+    .drop-surface strong{color:var(--primary)}
+
+    /* 추가 스타일링 */
+    .btn.file-attach{background:var(--chip);color:var(--primary);border:1px solid var(--border)}
+    .btn.file-attach:hover{background:var(--primary);color:#fff;border-color:var(--primary)}
+
+    @media (max-width:640px){
+      .card{height:92vh;border-radius:14px}
+      .msg-content{max-width:85%}
+      header h3{font-size:1.05rem}
+      .toolbar .btn span{display:none}
+    }
   </style>
 </head>
 <body>
-  <div class="loading" id="loading">
-    <div class="spinner"></div>
-    <div class="loading-text">채팅방 연결 중...</div>
-    <div class="connection-status" id="connectionStatus"></div>
+  <!-- Drag & Drop Overlay -->
+  <div class="drop-zone" id="dropZone" aria-hidden="true">
+    <div class="drop-surface">
+      <div>여기에 파일을 <strong>끌어다 놓으면</strong> 업로드됩니다 📎</div>
+    </div>
   </div>
 
-  <div class="wrap" style="display:none" id="app">
+  <div class="wrap">
     <div class="card">
       <header>
-        <h3>💬 오픈 채팅방</h3>
-        <div id="presence">
-          <span class="user-count">접속자 0명</span>
-          <span class="status-indicator"></span>
+        <h3>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity:.95">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v2"></path>
+            <path d="M14 10h7m-3.5-3.5V13"></path>
+          </svg>
+          오픈 채팅방
+        </h3>
+        <div class="toolbar">
+          <div class="presence" id="presence">
+            <span class="dot"></span>
+            <span id="presenceText">접속자 0명</span>
+          </div>
+          <button class="btn btn-ghost" id="themeToggle" title="다크모드 전환">
+            <svg id="sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2m0 16v2m10-10h-2M4 12H2m15.364-7.364-1.414 1.414M8.05 16.95l-1.414 1.414m12.728 0-1.414-1.414M8.05 7.05 6.636 5.636"/></svg>
+            <svg id="moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3A7 7 0 0 0 21 12.79z"/></svg>
+            <span>Theme</span>
+          </button>
         </div>
       </header>
 
       <div class="user-section">
         <input id="name" placeholder="닉네임을 입력하세요" maxlength="20" />
         <button id="saveName">저장</button>
-        <!-- ✅ 파일 업로드 입력 (py/html 포함) -->
-        <input id="file" class="file-input" type="file"
-               accept=".xlsx,.xls,.doc,.docx,.pdf,.csv,.py,.html,.htm,.txt" />
+        <!-- 숨겨진 파일 입력 + 버튼 -->
+        <input id="file" type="file" accept=".xlsx,.xls,.doc,.docx,.pdf,.csv,.py,.html,.htm,.txt" style="display:none" />
+        <button class="btn file-attach" id="attachBtn" type="button" title="파일 첨부">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21.44 11.05 12 20.5a6 6 0 1 1-8.49-8.49l9.19-9.19a4 4 0 1 1 5.66 5.66L8.5 18"/></svg>
+          <span>파일 첨부</span>
+        </button>
       </div>
 
       <div class="error-message" id="errorMessage"></div>
-      <div id="messages"></div>
+      <div id="messages" aria-live="polite"></div>
 
       <form class="chat-form" id="chatForm">
+        <button class="icon-btn" id="attachBtn2" type="button" title="파일 첨부">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21.44 11.05 12 20.5a6 6 0 1 1-8.49-8.49l9.19-9.19a4 4 0 1 1 5.66 5.66L8.5 18"/></svg>
+        </button>
         <input id="text" placeholder="메시지를 입력하세요..." maxlength="500" autocomplete="off" />
         <button type="submit" class="send-button" id="sendButton">
-          <span>전송</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="22" y1="2" x2="11" y2="13"></line>
-            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-          </svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+          전송
         </button>
       </form>
     </div>
   </div>
 
-  <!-- Firebase SDK + 앱 코드 -->
+  <!-- Firebase + App -->
   <script type="module">
     // ===== Firebase 설정 =====
     const firebaseConfig = {
@@ -103,15 +218,11 @@
       appId: "1:882227172037:web:6d4a002d7a68c7858896ac"
     };
 
-    // Firebase SDKs
+    // Firebase SDK
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getAuth, signInAnonymously, updateProfile, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-    import {
-      getFirestore, collection, addDoc, serverTimestamp, query, orderBy, limit, onSnapshot
-    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-    import {
-      getDatabase, ref, onValue, onDisconnect, serverTimestamp as rtdbTs, set, remove
-    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+    import { getFirestore, collection, addDoc, serverTimestamp, query, orderBy, limit, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    import { getDatabase, ref, onValue, onDisconnect, serverTimestamp as rtdbTs, set, remove } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
     // 초기화
     const app = initializeApp(firebaseConfig);
@@ -124,63 +235,78 @@
     const messagesRef = collection(db, `rooms/${ROOM_ID}/messages`);
 
     // DOM
-    const $loading = document.getElementById("loading");
-    const $app = document.getElementById("app");
     const $messages = document.getElementById("messages");
     const $form = document.getElementById("chatForm");
     const $text = document.getElementById("text");
     const $name = document.getElementById("name");
     const $saveName = document.getElementById("saveName");
     const $presence = document.getElementById("presence");
+    const $presenceText = document.getElementById("presenceText");
     const $errorMessage = document.getElementById("errorMessage");
     const $sendButton = document.getElementById("sendButton");
-    const $connectionStatus = document.getElementById("connectionStatus");
     const $file = document.getElementById("file");
+    const $attachBtn = document.getElementById("attachBtn");
+    const $attachBtn2 = document.getElementById("attachBtn2");
+    const $dropZone = document.getElementById("dropZone");
+    const $themeToggle = document.getElementById("themeToggle");
 
     let currentUid = null;
     let lastMessageTime = 0;
     const MESSAGE_COOLDOWN = 1000;
 
-    // 유틸
-    function showError(msg){ $errorMessage.textContent = msg; $errorMessage.style.display='block'; setTimeout(()=>{$errorMessage.style.display='none'}, 5000); }
+    // ===== Theme =====
+    const savedTheme = localStorage.getItem("theme") || "light";
+    document.documentElement.setAttribute("data-theme", savedTheme);
+    updateThemeIcon(savedTheme);
+    $themeToggle.addEventListener("click", () => {
+      const now = document.documentElement.getAttribute("data-theme") === "light" ? "dark" : "light";
+      document.documentElement.setAttribute("data-theme", now);
+      localStorage.setItem("theme", now);
+      updateThemeIcon(now);
+    });
+    function updateThemeIcon(theme){
+      const sun = document.getElementById("sun");
+      const moon = document.getElementById("moon");
+      if (theme === "dark") { sun.style.display="none"; moon.style.display="inline"; }
+      else { sun.style.display="inline"; moon.style.display="none"; }
+    }
+
+    // ===== 유틸 =====
+    function showError(msg){ $errorMessage.textContent = msg; $errorMessage.style.display='block'; setTimeout(()=>{$errorMessage.style.display='none'}, 4500); }
     const savedName = localStorage.getItem('chatName'); if (savedName) $name.value = savedName;
     function esc(s=""){ return s.replace(/[&<>"']/g, m=>({ "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;" }[m])); }
-    function linkify(text){ return text.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer" class="file-link">$1</a>'); }
-    function formatBytes(n){ if(!n&&n!==0) return ""; const u=['B','KB','MB','GB']; let i=0; let v=n; while(v>=1024&&i<u.length-1){v/=1024;i++} return (i?v.toFixed(2):v)+' '+u[i]; }
+    function linkify(text){ return text.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" rel="noopener" class="file-link">$1</a>'); }
+    function formatBytes(n){ if(n==null) return ""; const u=['B','KB','MB','GB']; let i=0, v=n; while(v>=1024&&i<u.length-1){v/=1024;i++} return (i?v.toFixed(2):v)+' '+u[i]; }
+    function initials(name){ const t=(name||"").trim(); if(!t) return "U"; const parts=t.split(/\s+/); return (parts[0][0]||"U").toUpperCase(); }
 
-    // ===== 인증 + 프레즌스(.info/connected) =====
-    signInAnonymously(auth).catch(e=>{ showError('로그인 실패: '+e.message); $connectionStatus.textContent='로그인 실패'; });
+    // ===== 인증 + 프레즌스 =====
+    signInAnonymously(auth).catch(e=> showError('로그인 실패: '+e.message));
 
     const ready = { authed:false, connected:false, registered:false };
     onAuthStateChanged(auth, (user) => {
       ready.authed = !!user;
       if (user) currentUid = user.uid;
       tryRegisterPresence();
-      // UI 표시
-      if (user) { $loading.style.display='none'; $app.style.display='block'; }
+      // UI show
+      document.querySelector(".wrap").style.display="block";
     });
 
     const connectedRef = ref(rtdb, ".info/connected");
-    onValue(connectedRef, (snap) => {
-      ready.connected = snap.val() === true;
-      tryRegisterPresence();
-    });
+    onValue(connectedRef, (snap) => { ready.connected = snap.val() === true; tryRegisterPresence(); });
 
     function tryRegisterPresence(){
       if (!ready.authed || !ready.connected || ready.registered || !auth.currentUser) return;
       ready.registered = true;
       const meRef = ref(rtdb, `presence/${ROOM_ID}/${auth.currentUser.uid}`);
       onDisconnect(meRef).remove().catch(()=>{});
-      set(meRef, { uid: auth.currentUser.uid, name: $name.value || "익명", online:true, lastSeen: rtdbTs() })
-        .catch(err => { ready.registered=false; console.error(err); });
+      set(meRef, { uid: auth.currentUser.uid, name: $name.value || "익명", online:true, lastSeen: rtdbTs() }).catch(err => { ready.registered=false; console.error(err); });
     }
 
     // 접속자 수
-    const presenceRef = ref(rtdb, `presence/${ROOM_ID}`);
-    onValue(presenceRef, (snap) => {
+    onValue(ref(rtdb, `presence/${ROOM_ID}`), (snap) => {
       const val = snap.val() || {};
-      const count = Object.keys(val).length; // onDisconnect로 정리되므로 online 플래그 체크 불필요
-      $presence.innerHTML = `<span class="user-count">접속자 ${count}명</span><span class="status-indicator"></span>`;
+      const count = Object.keys(val).length;
+      $presenceText.textContent = `접속자 ${count}명`;
     });
 
     // 닉네임 저장
@@ -213,18 +339,29 @@
 
         let bodyHtml = "";
         if (m.type === "file" && m.fileUrl) {
-          const size = m.fileSize ? ` <span style="color:#9ca3af">(${formatBytes(m.fileSize)})</span>` : "";
-          bodyHtml = `<div class="bubble">📎 <a href="${m.fileUrl}" target="_blank" rel="noopener" class="file-link" download>${esc(m.fileName || "파일 다운로드")}</a>${size}</div>`;
+          const size = m.fileSize ? ` <span class="muted">(${formatBytes(m.fileSize)})</span>` : "";
+          bodyHtml = `
+            <div class="bubble">
+              <div class="file-card">
+                <svg class="file-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+                <div>
+                  <div><a href="${m.fileUrl}" target="_blank" rel="noopener" class="file-link" download>${esc(m.fileName || "파일 다운로드")}</a>${size}</div>
+                  <div class="file-actions muted">새 탭에서 열기 · 저장</div>
+                </div>
+              </div>
+            </div>`;
         } else {
           bodyHtml = `<div class="bubble">${linkify(esc(m.text || ""))}</div>`;
         }
 
         arr.push(`
           <div class="msg ${isMe ? "me" : ""}">
+            ${isMe ? "" : `<div class="avatar" title="${esc(m.name||"익명")}">${esc(initials(m.name||"익명"))}</div>`}
             <div class="msg-content">
               <div class="meta">${esc(m.name || "익명")} · ${timeStr}</div>
               ${bodyHtml}
             </div>
+            ${isMe ? `<div class="avatar" title="${esc(m.name||"나")}">${esc(initials(m.name||"나"))}</div>` : ""}
           </div>
         `);
       });
@@ -239,7 +376,7 @@
       const nickname = ($name.value || "익명").trim();
       if (!text) return;
       const now = Date.now();
-      if (now - lastMessageTime < MESSAGE_COOLDOWN) return showError("메시지 전송이 너무 빠릅니다. 잠시 후 다시 시도해주세요.");
+      if (now - lastMessageTime < 1000) return showError("메시지 전송이 너무 빠릅니다.");
       if (text.length > 500) return showError("메시지는 500자 이내로 입력해주세요.");
 
       $sendButton.disabled = true; $text.disabled = true;
@@ -250,7 +387,7 @@
       finally{ $sendButton.disabled = false; $text.disabled = false; $text.focus(); }
     });
 
-    // 언로드/가시성
+    // 떠날 때 presence 정리
     window.addEventListener('beforeunload', () => { if (currentUid) remove(ref(rtdb, `presence/${ROOM_ID}/${currentUid}`)); });
     document.addEventListener('visibilitychange', () => {
       if (!currentUid) return;
@@ -259,66 +396,69 @@
     });
 
     // ===== 파일 업로드 (Supabase Edge Function 사용) =====
-    // 당신이 준 함수 URL
-// === 파일 업로드 (Supabase Edge Function 사용) ===
-const EDGE_UPLOAD_URL = "https://qcqxomdqemjqhykxrugf.supabase.co/functions/v1/upload";
+    const EDGE_UPLOAD_URL = "https://qcqxomdqemjqhykxrugf.supabase.co/functions/v1/upload";
 
-$file?.addEventListener("change", async (e) => {
-  const f = e.target.files?.[0];
-  if (!f) return;
+    $attachBtn.addEventListener("click", ()=> $file.click());
+    $attachBtn2.addEventListener("click", ()=> $file.click());
 
-  let url; // ① 업로드 결과 URL을 담을 변수
-
-  // ① Supabase(Edge Function)로 업로드
-  try {
-    const fd = new FormData();
-    fd.append("file", f);
-
-    const res = await fetch(`${EDGE_UPLOAD_URL}?room=${ROOM_ID}`, {
-      method: "POST",
-      body: fd
+    // Drag & Drop
+    window.addEventListener("dragover", (e)=>{ e.preventDefault(); $dropZone.classList.add("show"); });
+    window.addEventListener("dragleave", (e)=>{ $dropZone.classList.remove("show"); });
+    window.addEventListener("drop", (e)=>{
+      e.preventDefault(); $dropZone.classList.remove("show");
+      const f = e.dataTransfer?.files?.[0]; if (f) handleFileUpload(f);
     });
 
-    // 함수 호출 자체가 실패한 경우(권한/CORS/검증 등)
-    if (!res.ok) {
-      const t = await res.text().catch(() => "");
-      throw new Error(`업로드 함수 호출 실패: ${res.status} ${res.statusText} ${t}`);
+    $file.addEventListener("change", (e)=>{
+      const f = e.target.files?.[0];
+      if (!f) return;
+      handleFileUpload(f);
+      e.target.value = ""; // reset
+    });
+
+    async function handleFileUpload(f){
+      // .html fail-to-fetch 회피: 안전 MIME으로 전송
+      const ext = (f.name.split(".").pop() || "").toLowerCase();
+      let uploadFile = f;
+      if (ext === "html" || ext === "htm") {
+        uploadFile = new File([f], f.name, { type: "application/octet-stream" });
+      } else if (ext === "py" && (!f.type || f.type === "")) {
+        uploadFile = new File([f], f.name, { type: "text/plain" });
+      }
+
+      let url;
+      try {
+        const fd = new FormData();
+        fd.append("file", uploadFile);
+        const res = await fetch(`${EDGE_UPLOAD_URL}?room=${ROOM_ID}`, { method: "POST", body: fd });
+        if (!res.ok) {
+          const t = await res.text().catch(()=> "");
+          throw new Error(`업로드 함수 호출 실패: ${res.status} ${res.statusText} ${t}`);
+        }
+        const json = await res.json();
+        url = json?.url;
+        if (!url) throw new Error("업로드는 성공했지만 URL이 없습니다.");
+      } catch (err) {
+        console.error("[upload] 실패:", err);
+        showError("업로드 실패: " + (err?.message || err));
+        return;
+      }
+
+      try {
+        await addDoc(messagesRef, {
+          uid: currentUid,
+          name: ($name.value || "익명").slice(0, 24),
+          type: "file",
+          fileName: f.name,     // 원래 파일명 표시
+          fileSize: f.size,
+          fileUrl: url,
+          ts: serverTimestamp()
+        });
+      } catch (err) {
+        console.error("[firestore] 메시지 기록 실패:", err);
+        showError("메시지 기록 실패(권한?): " + (err?.message || err));
+      }
     }
-
-    const json = await res.json();
-    url = json?.url;
-    if (!url) throw new Error("업로드는 성공했지만 URL이 없습니다.");
-
-    console.debug("[upload] OK:", { file: f.name, size: f.size, url });
-  } catch (err) {
-    console.error("[upload] 실패:", err);
-    showError("업로드 실패: " + (err?.message || err));
-    e.target.value = ""; // 파일 입력 리셋
-    return; // 여기서 종료 (②로 가지 않음)
-  }
-
-  // ② 업로드 성공 후 Firestore에 '파일 메시지' 기록
-  try {
-    await addDoc(messagesRef, {
-      uid: currentUid,
-      name: ($name.value || "익명").slice(0, 24),
-      type: "file",
-      fileName: f.name,
-      fileSize: f.size,
-      fileUrl: url,
-      ts: serverTimestamp()
-    });
-
-    console.debug("[firestore] 파일 메시지 기록 OK");
-  } catch (err) {
-    console.error("[firestore] 메시지 기록 실패:", err);
-    showError("메시지 기록 실패(권한?): " + (err?.message || err));
-    // 실패하더라도 사용자가 URL을 잃지 않도록 복사 옵션을 줄 수도 있음:
-    // navigator.clipboard?.writeText(url).catch(()=>{});
-  } finally {
-    e.target.value = ""; // 파일 입력 리셋
-  }
-});
   </script>
 </body>
 </html>
