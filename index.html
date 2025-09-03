@@ -260,35 +260,65 @@
 
     // ===== 파일 업로드 (Supabase Edge Function 사용) =====
     // 당신이 준 함수 URL
-    const EDGE_UPLOAD_URL = "https://qcqxomdqemjqhykxrugf.supabase.co/functions/v1/upload";
+// === 파일 업로드 (Supabase Edge Function 사용) ===
+const EDGE_UPLOAD_URL = "https://qcqxomdqemjqhykxrugf.supabase.co/functions/v1/upload";
 
-    $file?.addEventListener("change", async (e) => {
-      const f = e.target.files?.[0];
-      if (!f) return;
+$file?.addEventListener("change", async (e) => {
+  const f = e.target.files?.[0];
+  if (!f) return;
 
-      try{
-        const fd = new FormData();
-        fd.append("file", f);
-        const res = await fetch(`${EDGE_UPLOAD_URL}?room=${ROOM_ID}`, { method:"POST", body:fd });
-        if (!res.ok) throw new Error(await res.text());
-        const { url } = await res.json();
+  let url; // ① 업로드 결과 URL을 담을 변수
 
-        await addDoc(messagesRef, {
-          uid: currentUid,
-          name: ($name.value || "익명").slice(0,24),
-          type: "file",
-          fileName: f.name,
-          fileSize: f.size,
-          fileUrl: url,
-          ts: serverTimestamp()
-        });
+  // ① Supabase(Edge Function)로 업로드
+  try {
+    const fd = new FormData();
+    fd.append("file", f);
 
-        e.target.value = "";
-      }catch(err){
-        console.error(err);
-        showError("파일 업로드 실패: " + (err?.message || err));
-      }
+    const res = await fetch(`${EDGE_UPLOAD_URL}?room=${ROOM_ID}`, {
+      method: "POST",
+      body: fd
     });
+
+    // 함수 호출 자체가 실패한 경우(권한/CORS/검증 등)
+    if (!res.ok) {
+      const t = await res.text().catch(() => "");
+      throw new Error(`업로드 함수 호출 실패: ${res.status} ${res.statusText} ${t}`);
+    }
+
+    const json = await res.json();
+    url = json?.url;
+    if (!url) throw new Error("업로드는 성공했지만 URL이 없습니다.");
+
+    console.debug("[upload] OK:", { file: f.name, size: f.size, url });
+  } catch (err) {
+    console.error("[upload] 실패:", err);
+    showError("업로드 실패: " + (err?.message || err));
+    e.target.value = ""; // 파일 입력 리셋
+    return; // 여기서 종료 (②로 가지 않음)
+  }
+
+  // ② 업로드 성공 후 Firestore에 '파일 메시지' 기록
+  try {
+    await addDoc(messagesRef, {
+      uid: currentUid,
+      name: ($name.value || "익명").slice(0, 24),
+      type: "file",
+      fileName: f.name,
+      fileSize: f.size,
+      fileUrl: url,
+      ts: serverTimestamp()
+    });
+
+    console.debug("[firestore] 파일 메시지 기록 OK");
+  } catch (err) {
+    console.error("[firestore] 메시지 기록 실패:", err);
+    showError("메시지 기록 실패(권한?): " + (err?.message || err));
+    // 실패하더라도 사용자가 URL을 잃지 않도록 복사 옵션을 줄 수도 있음:
+    // navigator.clipboard?.writeText(url).catch(()=>{});
+  } finally {
+    e.target.value = ""; // 파일 입력 리셋
+  }
+});
   </script>
 </body>
 </html>
