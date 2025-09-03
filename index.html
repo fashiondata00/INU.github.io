@@ -3,331 +3,50 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Digital marketing(Made by INU Fashiondata00 lab)</title>
+  <title>Data marketing (Made by. Fashiondata00 Lab)</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    
-    body { 
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      background: #f7f8fa;
-      min-height: 100vh;
-      padding: 20px;
-    }
-    
-    .wrap { 
-      max-width: 800px; 
-      margin: 0 auto;
-      animation: fadeIn 0.5s ease-in;
-    }
-    
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    
-    .card { 
-      background: #ffffff; 
-      border-radius: 16px; 
-      overflow: hidden;
-      box-shadow: 0 2px 20px rgba(0,0,0,0.08);
-      height: 85vh;
-      display: flex;
-      flex-direction: column;
-      border: 1px solid #e5e7eb;
-    }
-    
-    header { 
-      background: #ffffff;
-      color: #1f2937;
-      padding: 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #e5e7eb;
-    }
-    
-    header h3 { 
-      font-size: 1.4rem;
-      font-weight: 600;
-      color: #111827;
-    }
-    
-    #presence { 
-      background: #f3f4f6;
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-size: 0.9rem;
-      color: #6b7280;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    
-    .user-section {
-      padding: 15px 20px;
-      background: #fafbfc;
-      border-bottom: 1px solid #e5e7eb;
-      display: flex;
-      gap: 10px;
-      align-items: center;
-    }
-    
-    #name {
-      flex: 1;
-      padding: 10px 15px;
-      border: 1px solid #d1d5db;
-      border-radius: 8px;
-      font-size: 15px;
-      transition: all 0.3s;
-      background: white;
-    }
-    
-    #name:focus {
-      outline: none;
-      border-color: #3b82f6;
-      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-    }
-    
-    #saveName {
-      padding: 10px 20px;
-      background: #3b82f6;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-    
-    #saveName:hover {
-      background: #2563eb;
-      box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
-    }
-    
-    #saveName:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-    
-    .status-indicator {
-      display: inline-block;
-      width: 8px;
-      height: 8px;
-      background: #10b981;
-      border-radius: 50%;
-      animation: pulse 2s infinite;
-    }
-    
-    @keyframes pulse {
-      0%, 100% { 
-        opacity: 1;
-        transform: scale(1);
-      }
-      50% { 
-        opacity: 0.8;
-        transform: scale(1.2);
-      }
-    }
-    
-    #messages { 
-      flex: 1;
-      overflow-y: auto;
-      padding: 20px;
-      background: #fafbfc;
-    }
-    
-    #messages::-webkit-scrollbar {
-      width: 6px;
-    }
-    
-    #messages::-webkit-scrollbar-track {
-      background: #f3f4f6;
-      border-radius: 10px;
-    }
-    
-    #messages::-webkit-scrollbar-thumb {
-      background: #d1d5db;
-      border-radius: 10px;
-    }
-    
-    #messages::-webkit-scrollbar-thumb:hover {
-      background: #9ca3af;
-    }
-    
-    .msg { 
-      margin: 12px 0;
-      display: flex;
-      animation: slideIn 0.3s ease-out;
-    }
-    
-    @keyframes slideIn {
-      from { 
-        opacity: 0;
-        transform: translateY(10px);
-      }
-      to { 
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    
-    .msg.me { 
-      justify-content: flex-end;
-    }
-    
-    .msg-content {
-      max-width: 70%;
-    }
-    
-    .msg .meta { 
-      font-size: 12px;
-      color: #9ca3af;
-      margin-bottom: 4px;
-      padding: 0 8px;
-    }
-    
-    .msg.me .meta {
-      text-align: right;
-    }
-    
-    .msg .bubble { 
-      background: white;
-      padding: 10px 14px;
-      border-radius: 16px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-      word-wrap: break-word;
-      position: relative;
-      border: 1px solid #e5e7eb;
-      color: #1f2937;
-    }
-    
-    .msg.me .bubble { 
-      background: #3b82f6;
-      color: white;
-      border: none;
-    }
-    
-    .chat-form { 
-      padding: 16px 20px;
-      background: white;
-      border-top: 1px solid #e5e7eb;
-      display: flex;
-      gap: 10px;
-    }
-    
-    #text { 
-      flex: 1;
-      padding: 10px 16px;
-      border: 1px solid #d1d5db;
-      border-radius: 24px;
-      font-size: 15px;
-      transition: all 0.3s;
-      background: #f9fafb;
-    }
-    
-    #text:focus {
-      outline: none;
-      border-color: #3b82f6;
-      background: white;
-      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-    }
-    
-    .send-button { 
-      padding: 10px 20px;
-      background: #3b82f6;
-      color: white;
-      border: none;
-      border-radius: 24px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.3s;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    
-    .send-button:hover:not(:disabled) {
-      background: #2563eb;
-      box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
-    }
-    
-    .send-button:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-      background: #9ca3af;
-    }
-    
-    .loading {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-      background: white;
-      padding: 40px;
-      border-radius: 16px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-      z-index: 9999;
-    }
-    
-    .spinner {
-      width: 50px;
-      height: 50px;
-      border: 3px solid #e5e7eb;
-      border-top-color: #3b82f6;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-      margin: 0 auto 20px;
-    }
-    
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-    
-    .loading-text {
-      color: #6b7280;
-      font-size: 16px;
-      margin-bottom: 10px;
-    }
-    
-    .connection-status {
-      color: #9ca3af;
-      font-size: 14px;
-    }
-    
-    .error-message {
-      background: #fef2f2;
-      color: #dc2626;
-      padding: 12px 16px;
-      border-radius: 8px;
-      margin: 10px 20px;
-      display: none;
-      border: 1px solid #fecaca;
-      font-size: 14px;
-    }
-    
-    .user-count {
-      font-weight: 600;
-      color: #374151;
-    }
-    
-    @media (max-width: 600px) {
-      .card { 
-        height: 90vh;
-        border-radius: 0;
-        border: none;
-      }
-      .wrap {
-        padding: 0;
-      }
-      body {
-        padding: 0;
-      }
-      .msg-content { max-width: 85%; }
-      header h3 { font-size: 1.2rem; }
-      .user-section { flex-direction: column; }
-      #name, #saveName { width: 100%; }
-    }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background:#f7f8fa; min-height:100vh; padding:20px; }
+    .wrap { max-width:800px; margin:0 auto; animation:fadeIn .5s ease-in; }
+    @keyframes fadeIn { from{opacity:0; transform:translateY(20px)} to{opacity:1; transform:translateY(0)} }
+    .card { background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 2px 20px rgba(0,0,0,.08); height:85vh; display:flex; flex-direction:column; border:1px solid #e5e7eb; }
+    header { background:#fff; color:#1f2937; padding:20px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #e5e7eb; }
+    header h3 { font-size:1.4rem; font-weight:600; color:#111827; }
+    #presence { background:#f3f4f6; padding:8px 16px; border-radius:20px; font-size:.9rem; color:#6b7280; display:flex; align-items:center; gap:8px; }
+    .user-section { padding:15px 20px; background:#fafbfc; border-bottom:1px solid #e5e7eb; display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+    #name { flex:1; min-width:200px; padding:10px 15px; border:1px solid #d1d5db; border-radius:8px; font-size:15px; transition:.3s; background:#fff; }
+    #name:focus { outline:none; border-color:#3b82f6; box-shadow:0 0 0 3px rgba(59,130,246,.1); }
+    #saveName { padding:10px 20px; background:#3b82f6; color:#fff; border:none; border-radius:8px; font-weight:500; cursor:pointer; transition:.3s; }
+    #saveName:hover { background:#2563eb; box-shadow:0 2px 8px rgba(59,130,246,.3); }
+    #saveName:disabled { opacity:.5; cursor:not-allowed; }
+    .status-indicator { width:8px; height:8px; background:#10b981; border-radius:50%; animation:pulse 2s infinite; display:inline-block; }
+    @keyframes pulse { 0%,100%{opacity:1; transform:scale(1)} 50%{opacity:.8; transform:scale(1.2)} }
+    #messages { flex:1; overflow-y:auto; padding:20px; background:#fafbfc; }
+    #messages::-webkit-scrollbar{width:6px} #messages::-webkit-scrollbar-track{background:#f3f4f6; border-radius:10px} #messages::-webkit-scrollbar-thumb{background:#d1d5db; border-radius:10px} #messages::-webkit-scrollbar-thumb:hover{background:#9ca3af}
+    .msg{ margin:12px 0; display:flex; animation:slideIn .3s ease-out; }
+    @keyframes slideIn{ from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:translateY(0)} }
+    .msg.me{ justify-content:flex-end; }
+    .msg-content{ max-width:70%; }
+    .msg .meta{ font-size:12px; color:#9ca3af; margin-bottom:4px; padding:0 8px; }
+    .msg.me .meta{ text-align:right; }
+    .msg .bubble{ background:#fff; padding:10px 14px; border-radius:16px; box-shadow:0 1px 3px rgba(0,0,0,.08); word-wrap:break-word; border:1px solid #e5e7eb; color:#1f2937; }
+    .msg.me .bubble{ background:#3b82f6; color:#fff; border:none; }
+    .file-link{ text-decoration:underline; }
+    .chat-form{ padding:16px 20px; background:#fff; border-top:1px solid #e5e7eb; display:flex; gap:10px; }
+    #text{ flex:1; padding:10px 16px; border:1px solid #d1d5db; border-radius:24px; font-size:15px; transition:.3s; background:#f9fafb; }
+    #text:focus{ outline:none; border-color:#3b82f6; background:#fff; box-shadow:0 0 0 3px rgba(59,130,246,.1); }
+    .send-button{ padding:10px 20px; background:#3b82f6; color:#fff; border:none; border-radius:24px; font-weight:500; cursor:pointer; transition:.3s; display:flex; align-items:center; gap:6px; }
+    .send-button:hover:not(:disabled){ background:#2563eb; box-shadow:0 2px 8px rgba(59,130,246,.3); }
+    .send-button:disabled{ opacity:.5; cursor:not-allowed; background:#9ca3af; }
+    .loading{ position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); text-align:center; background:#fff; padding:40px; border-radius:16px; box-shadow:0 10px 40px rgba(0,0,0,.1); z-index:9999; }
+    .spinner{ width:50px; height:50px; border:3px solid #e5e7eb; border-top-color:#3b82f6; border-radius:50%; animation:spin 1s linear infinite; margin:0 auto 20px; }
+    @keyframes spin{ to{transform:rotate(360deg)} }
+    .loading-text{ color:#6b7280; font-size:16px; margin-bottom:10px; }
+    .connection-status{ color:#9ca3af; font-size:14px; }
+    .error-message{ background:#fef2f2; color:#dc2626; padding:12px 16px; border-radius:8px; margin:10px 20px; display:none; border:1px solid #fecaca; font-size:14px; }
+    .user-count{ font-weight:600; color:#374151; }
+    .file-input { padding:8px 12px; border:1px solid #d1d5db; border-radius:8px; background:#fff; }
+    @media (max-width:600px){ .card{ height:90vh; border-radius:0; border:none } .wrap{ padding:0 } body{ padding:0 } .msg-content{ max-width:85% } header h3{ font-size:1.2rem } .user-section{ flex-direction:column } #name,#saveName{ width:100% } }
   </style>
 </head>
 <body>
@@ -336,26 +55,28 @@
     <div class="loading-text">채팅방 연결 중...</div>
     <div class="connection-status" id="connectionStatus"></div>
   </div>
-  
-  <div class="wrap" style="display: none;" id="app">
+
+  <div class="wrap" style="display:none" id="app">
     <div class="card">
       <header>
-        <h3>Digital marketing(Made by INU Fashiondata00 lab)</h3>
+        <h3>💬 오픈 채팅방</h3>
         <div id="presence">
-          <span class="user-count">Account</span>
+          <span class="user-count">접속자 0명</span>
           <span class="status-indicator"></span>
         </div>
       </header>
-      
+
       <div class="user-section">
         <input id="name" placeholder="닉네임을 입력하세요" maxlength="20" />
         <button id="saveName">저장</button>
+        <!-- ✅ 파일 업로드 입력 (py/html 포함) -->
+        <input id="file" class="file-input" type="file"
+               accept=".xlsx,.xls,.doc,.docx,.pdf,.csv,.py,.html,.htm,.txt" />
       </div>
-      
+
       <div class="error-message" id="errorMessage"></div>
-      
       <div id="messages"></div>
-      
+
       <form class="chat-form" id="chatForm">
         <input id="text" placeholder="메시지를 입력하세요..." maxlength="500" autocomplete="off" />
         <button type="submit" class="send-button" id="sendButton">
@@ -369,11 +90,9 @@
     </div>
   </div>
 
-  <!-- Firebase SDK -->
+  <!-- Firebase SDK + 앱 코드 -->
   <script type="module">
-    console.log('스크립트 시작');
-    
-    // Firebase 설정
+    // ===== Firebase 설정 =====
     const firebaseConfig = {
       apiKey: "AIzaSyB3Vf5qeWKdWPFrBddnEczXdtzv2Iw8peQ",
       authDomain: "marketing-1e96e.firebaseapp.com",
@@ -384,27 +103,14 @@
       appId: "1:882227172037:web:6d4a002d7a68c7858896ac"
     };
 
-    // SDK 불러오기
+    // Firebase SDKs
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getAuth, signInAnonymously, updateProfile, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-    import { 
-      getFirestore, 
-      collection, 
-      addDoc, 
-      serverTimestamp, 
-      query, 
-      orderBy, 
-      limit, 
-      onSnapshot
+    import {
+      getFirestore, collection, addDoc, serverTimestamp, query, orderBy, limit, onSnapshot
     } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-    import { 
-      getDatabase, 
-      ref, 
-      onValue, 
-      onDisconnect, 
-      serverTimestamp as rtdbTs, 
-      set, 
-      remove
+    import {
+      getDatabase, ref, onValue, onDisconnect, serverTimestamp as rtdbTs, set, remove
     } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
     // 초기화
@@ -413,10 +119,11 @@
     const db = getFirestore(app);
     const rtdb = getDatabase(app);
 
+    // 상수/참조
     const ROOM_ID = "open-room-1";
     const messagesRef = collection(db, `rooms/${ROOM_ID}/messages`);
 
-    // DOM 요소
+    // DOM
     const $loading = document.getElementById("loading");
     const $app = document.getElementById("app");
     const $messages = document.getElementById("messages");
@@ -428,249 +135,160 @@
     const $errorMessage = document.getElementById("errorMessage");
     const $sendButton = document.getElementById("sendButton");
     const $connectionStatus = document.getElementById("connectionStatus");
+    const $file = document.getElementById("file");
 
     let currentUid = null;
     let lastMessageTime = 0;
     const MESSAGE_COOLDOWN = 1000;
 
-    // 에러 표시 함수
-    function showError(message) {
-      $errorMessage.textContent = message;
-      $errorMessage.style.display = 'block';
-      setTimeout(() => {
-        $errorMessage.style.display = 'none';
-      }, 5000);
-    }
+    // 유틸
+    function showError(msg){ $errorMessage.textContent = msg; $errorMessage.style.display='block'; setTimeout(()=>{$errorMessage.style.display='none'}, 5000); }
+    const savedName = localStorage.getItem('chatName'); if (savedName) $name.value = savedName;
+    function esc(s=""){ return s.replace(/[&<>"']/g, m=>({ "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;" }[m])); }
+    function linkify(text){ return text.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer" class="file-link">$1</a>'); }
+    function formatBytes(n){ if(!n&&n!==0) return ""; const u=['B','KB','MB','GB']; let i=0; let v=n; while(v>=1024&&i<u.length-1){v/=1024;i++} return (i?v.toFixed(2):v)+' '+u[i]; }
 
-    // 로컬스토리지에서 닉네임 불러오기
-    const savedName = localStorage.getItem('chatName');
-    if (savedName) {
-      $name.value = savedName;
-    }
+    // ===== 인증 + 프레즌스(.info/connected) =====
+    signInAnonymously(auth).catch(e=>{ showError('로그인 실패: '+e.message); $connectionStatus.textContent='로그인 실패'; });
 
-    // XSS 방지
-    function escapeHtml(text) {
-      const div = document.createElement('div');
-      div.textContent = text;
-      return div.innerHTML;
-    }
-
-    // URL 링크 변환
-    function linkify(text) {
-      const urlRegex = /(https?:\/\/[^\s]+)/g;
-      return text.replace(urlRegex, '<a href="$1" target="_blank" rel="noopener noreferrer" style="color: #3b82f6; text-decoration: underline;">$1</a>');
-    }
-
-    // 익명 로그인
-    signInAnonymously(auth).catch(error => {
-      showError('로그인 실패: ' + error.message);
-      $connectionStatus.textContent = '로그인 실패';
-    });
-
+    const ready = { authed:false, connected:false, registered:false };
     onAuthStateChanged(auth, (user) => {
-      if (user) {
-        currentUid = user.uid;
-        console.log('로그인 성공:', currentUid);
-        
-        // Presence 설정 - 개선된 버전
-        const userRef = ref(rtdb, `presence/${ROOM_ID}/${currentUid}`);
-        const connectedRef = ref(rtdb, '.info/connected');
-        
-        // 연결 상태 감지
-        onValue(connectedRef, (snap) => {
-          if (snap.val() === true) {
-            // 연결됨
-            const userInfo = {
-              uid: currentUid,
-              name: $name.value || '익명',
-              online: true,
-              lastSeen: rtdbTs()
-            };
-            
-            set(userRef, userInfo);
-            
-            // 연결 해제 시 자동 제거
-            onDisconnect(userRef).remove();
-            
-            console.log('Presence 설정 완료');
-          }
-        });
-        
-        // 앱 표시
-        $loading.style.display = 'none';
-        $app.style.display = 'block';
-      }
+      ready.authed = !!user;
+      if (user) currentUid = user.uid;
+      tryRegisterPresence();
+      // UI 표시
+      if (user) { $loading.style.display='none'; $app.style.display='block'; }
     });
 
-    // 접속자 수 표시 - 개선된 버전
+    const connectedRef = ref(rtdb, ".info/connected");
+    onValue(connectedRef, (snap) => {
+      ready.connected = snap.val() === true;
+      tryRegisterPresence();
+    });
+
+    function tryRegisterPresence(){
+      if (!ready.authed || !ready.connected || ready.registered || !auth.currentUser) return;
+      ready.registered = true;
+      const meRef = ref(rtdb, `presence/${ROOM_ID}/${auth.currentUser.uid}`);
+      onDisconnect(meRef).remove().catch(()=>{});
+      set(meRef, { uid: auth.currentUser.uid, name: $name.value || "익명", online:true, lastSeen: rtdbTs() })
+        .catch(err => { ready.registered=false; console.error(err); });
+    }
+
+    // 접속자 수
     const presenceRef = ref(rtdb, `presence/${ROOM_ID}`);
     onValue(presenceRef, (snap) => {
-      const users = snap.val() || {};
-      const onlineUsers = Object.values(users).filter(user => user && user.online === true);
-      const count = onlineUsers.length;
-      
-      console.log('온라인 사용자:', count);
-      
-      $presence.innerHTML = `
-        <span class="user-count">접속자 ${count}명</span>
-        <span class="status-indicator"></span>
-      `;
+      const val = snap.val() || {};
+      const count = Object.keys(val).length; // onDisconnect로 정리되므로 online 플래그 체크 불필요
+      $presence.innerHTML = `<span class="user-count">접속자 ${count}명</span><span class="status-indicator"></span>`;
     });
 
     // 닉네임 저장
     $saveName.addEventListener("click", async () => {
-      const nickname = $name.value.trim();
-      
-      if (!nickname) {
-        showError('닉네임을 입력해주세요.');
-        return;
-      }
-      
-      if (nickname.length > 20) {
-        showError('닉네임은 20자 이내로 입력해주세요.');
-        return;
-      }
-      
+      const nickname = ($name.value || "").trim();
+      if (!nickname) return showError("닉네임을 입력해주세요.");
+      if (nickname.length > 20) return showError("닉네임은 20자 이내로 입력해주세요.");
       $saveName.disabled = true;
-      
-      try {
+      try{
         if (auth.currentUser) {
           await updateProfile(auth.currentUser, { displayName: nickname });
-          localStorage.setItem('chatName', nickname);
-          
-          // Presence 정보도 업데이트
-          const userRef = ref(rtdb, `presence/${ROOM_ID}/${currentUid}`);
-          await set(userRef, {
-            uid: currentUid,
-            name: nickname,
-            online: true,
-            lastSeen: rtdbTs()
-          });
-          
-          showError('✅ 닉네임이 저장되었습니다!');
+          localStorage.setItem("chatName", nickname);
+          const meRef = ref(rtdb, `presence/${ROOM_ID}/${auth.currentUser.uid}`);
+          await set(meRef, { uid: auth.currentUser.uid, name: nickname, online:true, lastSeen: rtdbTs() });
+          showError("✅ 닉네임이 저장되었습니다!");
         }
-      } catch (error) {
-        showError('닉네임 저장 실패: ' + error.message);
-      } finally {
-        $saveName.disabled = false;
-      }
+      }catch(e){ showError("닉네임 저장 실패: " + e.message); }
+      finally{ $saveName.disabled = false; }
     });
 
     // 메시지 수신
-    const q = query(messagesRef, orderBy("ts", "desc"), limit(50));
+    const q = query(messagesRef, orderBy("ts","desc"), limit(50));
     onSnapshot(q, (snap) => {
-      const messages = [];
+      const arr = [];
       snap.forEach(doc => {
         const m = doc.data();
         const isMe = m.uid === currentUid;
-        const time = m.ts?.toDate?.();
-        const timeStr = time ? new Intl.DateTimeFormat('ko-KR', {
-          hour: '2-digit',
-          minute: '2-digit'
-        }).format(time) : '';
-        
-        const safeText = linkify(escapeHtml(m.text));
-        
-        messages.push(`
-          <div class="msg ${isMe ? 'me' : ''}">
+        const ts = m.ts?.toDate?.() ? new Date(m.ts.toDate()) : null;
+        const timeStr = ts ? new Intl.DateTimeFormat('ko-KR',{hour:'2-digit',minute:'2-digit'}).format(ts) : '';
+
+        let bodyHtml = "";
+        if (m.type === "file" && m.fileUrl) {
+          const size = m.fileSize ? ` <span style="color:#9ca3af">(${formatBytes(m.fileSize)})</span>` : "";
+          bodyHtml = `<div class="bubble">📎 <a href="${m.fileUrl}" target="_blank" rel="noopener" class="file-link" download>${esc(m.fileName || "파일 다운로드")}</a>${size}</div>`;
+        } else {
+          bodyHtml = `<div class="bubble">${linkify(esc(m.text || ""))}</div>`;
+        }
+
+        arr.push(`
+          <div class="msg ${isMe ? "me" : ""}">
             <div class="msg-content">
-              <div class="meta">${escapeHtml(m.name)} · ${timeStr}</div>
-              <div class="bubble">${safeText}</div>
+              <div class="meta">${esc(m.name || "익명")} · ${timeStr}</div>
+              ${bodyHtml}
             </div>
           </div>
         `);
       });
-      
-      $messages.innerHTML = messages.reverse().join('');
+      $messages.innerHTML = arr.reverse().join("");
       $messages.scrollTop = $messages.scrollHeight;
-    }, (error) => {
-      showError('메시지 로드 실패: ' + error.message);
-    });
+    }, (err)=> showError('메시지 로드 실패: '+err.message));
 
     // 메시지 전송
     $form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      
-      const text = $text.value.trim();
-      const nickname = $name.value.trim() || '익명';
-      
+      const text = ($text.value || "").trim();
+      const nickname = ($name.value || "익명").trim();
       if (!text) return;
-      
-      // 쿨다운 체크
       const now = Date.now();
-      if (now - lastMessageTime < MESSAGE_COOLDOWN) {
-        showError('메시지 전송이 너무 빠릅니다. 잠시 후 다시 시도해주세요.');
-        return;
-      }
-      
-      if (text.length > 500) {
-        showError('메시지는 500자 이내로 입력해주세요.');
-        return;
-      }
-      
-      $sendButton.disabled = true;
-      $text.disabled = true;
-      
-      try {
+      if (now - lastMessageTime < MESSAGE_COOLDOWN) return showError("메시지 전송이 너무 빠릅니다. 잠시 후 다시 시도해주세요.");
+      if (text.length > 500) return showError("메시지는 500자 이내로 입력해주세요.");
+
+      $sendButton.disabled = true; $text.disabled = true;
+      try{
+        await addDoc(messagesRef, { uid: currentUid, name: nickname || "익명", text, ts: serverTimestamp() });
+        $text.value = ""; lastMessageTime = now;
+      }catch(err){ showError("메시지 전송 실패: " + err.message); }
+      finally{ $sendButton.disabled = false; $text.disabled = false; $text.focus(); }
+    });
+
+    // 언로드/가시성
+    window.addEventListener('beforeunload', () => { if (currentUid) remove(ref(rtdb, `presence/${ROOM_ID}/${currentUid}`)); });
+    document.addEventListener('visibilitychange', () => {
+      if (!currentUid) return;
+      const meRef = ref(rtdb, `presence/${ROOM_ID}/${currentUid}`);
+      set(meRef, { uid: currentUid, name: $name.value || "익명", online: !document.hidden, lastSeen: rtdbTs() });
+    });
+
+    // ===== 파일 업로드 (Supabase Edge Function 사용) =====
+    // 당신이 준 함수 URL
+    const EDGE_UPLOAD_URL = "https://qcqxomdqemjqhykxrugf.supabase.co/functions/v1/upload";
+
+    $file?.addEventListener("change", async (e) => {
+      const f = e.target.files?.[0];
+      if (!f) return;
+
+      try{
+        const fd = new FormData();
+        fd.append("file", f);
+        const res = await fetch(`${EDGE_UPLOAD_URL}?room=${ROOM_ID}`, { method:"POST", body:fd });
+        if (!res.ok) throw new Error(await res.text());
+        const { url } = await res.json();
+
         await addDoc(messagesRef, {
           uid: currentUid,
-          name: nickname,
-          text: text,
+          name: ($name.value || "익명").slice(0,24),
+          type: "file",
+          fileName: f.name,
+          fileSize: f.size,
+          fileUrl: url,
           ts: serverTimestamp()
         });
-        
-        $text.value = "";
-        lastMessageTime = now;
-        
-      } catch (error) {
-        showError('메시지 전송 실패: ' + error.message);
-      } finally {
-        $sendButton.disabled = false;
-        $text.disabled = false;
-        $text.focus();
-      }
-    });
 
-    // Enter 키로 전송
-    $text.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        $form.dispatchEvent(new Event('submit'));
-      }
-    });
-
-    // 브라우저 탭/창 닫을 때 처리
-    window.addEventListener('beforeunload', () => {
-      if (currentUid) {
-        const userRef = ref(rtdb, `presence/${ROOM_ID}/${currentUid}`);
-        remove(userRef);
-      }
-    });
-
-    // 페이지 visibility 변경 감지
-    document.addEventListener('visibilitychange', () => {
-      if (currentUid) {
-        const userRef = ref(rtdb, `presence/${ROOM_ID}/${currentUid}`);
-        if (document.hidden) {
-          // 탭이 백그라운드로 갔을 때
-          set(userRef, {
-            uid: currentUid,
-            name: $name.value || '익명',
-            online: false,
-            lastSeen: rtdbTs()
-          });
-        } else {
-          // 탭이 다시 활성화됐을 때
-          set(userRef, {
-            uid: currentUid,
-            name: $name.value || '익명',
-            online: true,
-            lastSeen: rtdbTs()
-          });
-        }
+        e.target.value = "";
+      }catch(err){
+        console.error(err);
+        showError("파일 업로드 실패: " + (err?.message || err));
       }
     });
   </script>
 </body>
 </html>
-
